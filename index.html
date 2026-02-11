@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>why_asbag | Content Creator Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-accent: #FF0000;
+            --bg-dark: #0f0f0f;
+            --bg-card: #1a1a1a;
+            --text-main: #ffffff;
+            --text-dim: #b3b3b3;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--primary-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-accent);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* --- Hero Section --- */
+        #home {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+            background: radial-gradient(circle at center, #250000 0%, #0f0f0f 70%);
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-content p {
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary-accent);
+            color: white;
+            border: 2px solid var(--primary-accent);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--glass-border);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: var(--glass-border);
+            transform: translateY(-3px);
+        }
+
+        /* --- Sections General --- */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 4px;
+            background: var(--primary-accent);
+        }
+
+        /* --- YouTube Feed --- */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .video-card:hover {
+            transform: scale(1.03);
+            border-color: var(--primary-accent);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            height: 2.4em;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        /* --- About Section --- */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--primary-accent);
+            margin-bottom: 10px;
+        }
+
+        .stat-card h4 {
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        /* --- Contact Form --- */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dim);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--glass-border);
+            color: white;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary-accent);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 4rem 10%;
+            background: #050505;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-accent);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Hide for mobile JS toggle */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: var(--bg-dark);
+                padding: 2rem;
+                text-align: center;
+                border-bottom: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">WHY<span>_ASBAG</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="hero-content">
+            <h1>DOMINATE THE <span>GAME</span></h1>
+            <p>High-octane gaming content, tech reviews, and digital storytelling. Join the community and witness the journey.</p>
+            <div class="cta-btns">
+                <a href="https://youtube.com/channel/UC7L58RS5fRlumgSGGKc_9bg" target="_blank" class="btn btn-primary">Subscribe Now</a>
+                <a href="#videos" class="btn btn-outline">Latest Content</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="videos">
+        <h2 class="section-title">Latest Uploads</h2>
+        <div class="video-grid" id="youtube-feed">
+            <p style="text-align: center; grid-column: 1/-1;">Loading latest content...</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h2 class="section-title" style="text-align: left; margin-left: 0;">Behind the Channel</h2>
+                <p>Welcome to the official hub of <strong>why_asbag</strong>. Dedicated to pushing the boundaries of gaming content, I focus on high-quality production, engaging commentary, and building a community of like-minded enthusiasts.</p>
+                <br>
+                <p>Whether it's competitive play or deep-dives into new tech, this channel is built on the passion for the digital era.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h4 id="sub-count">1K+</h4>
+                    <p>Subscribers</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-play-circle"></i>
+                    <h4 id="view-count">50K+</h4>
+                    <p>Total Views</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-video"></i>
+                    <h4>100+</h4>
+                    <p>Videos</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <h4>Weekly</h4>
+                    <p>Uploads</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea rows="5" placeholder="Let's collaborate..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://youtube.com/channel/UC7L58RS5fRlumgSGGKc_9bg" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+        <p class="copyright">&copy; 2026 why_asbag. All rights reserved. Built for Gamers.</p>
+    </footer>
+
+    <script>
+        // --- Navbar Toggle ---
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.querySelector('i').classList.toggle('fa-bars');
+            hamburger.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.querySelector('i').classList.add('fa-bars');
+                hamburger.querySelector('i').classList.remove('fa-times');
+            });
+        });
+
+        // --- YouTube RSS Fetcher ---
+        async function fetchYouTubeVideos() {
+            const channelId = 'UC7L58RS5fRlumgSGGKc_9bg';
+            const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+            // Use rss2json to convert XML to JSON without needing a backend
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const container = document.getElementById('youtube-feed');
+                
+                if (data.status === 'ok') {
+                    container.innerHTML = ''; // Clear loader
+                    
+                    // Get latest 3 videos
+                    const latestVideos = data.items.slice(0, 3);
+                    
+                    latestVideos.forEach(video => {
+                        // Extract Video ID from guid (yt:video:VIDEO_ID)
+                        const videoId = video.guid.split(':')[2];
+                        const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+                        
+                        const videoCard = `
+                            <div class="video-card">
+                                <div class="video-thumbnail">
+                                    <a href="${videoUrl}" target="_blank">
+                                        <img src="https://img.youtube.com/vi/${videoId}/maxresdefault.jpg" alt="${video.title}">
+                                    </a>
+                                </div>
+                                <div class="video-info">
+                                    <h3>${video.title}</h3>
+                                    <a href="${videoUrl}" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Watch Video</a>
+                                </div>
+                            </div>
+                        `;
+                        container.innerHTML += videoCard;
+                    });
+                } else {
+                    container.innerHTML = '<p>Failed to load videos. Please visit the channel directly.</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching YouTube feed:', error);
+                document.getElementById('youtube-feed').innerHTML = '<p>Error loading feed.</p>';
+            }
+        }
+
+        // Initialize Feed
+        fetchYouTubeVideos();
+
+        // Smooth Scroll Reveal Effect
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => {
+                const top = window.scrollY;
+                const offset = sec.offsetTop - 150;
+                const height = sec.offsetHeight;
+                
+                if (top >= offset && top < offset + height) {
+                    sec.style.opacity = '1';
+                    sec.style.transform = 'translateY(0)';
+                    sec.style.transition = 'all 0.8s ease-out';
+                }
+            });
+        });
+
+        // Set initial state for reveal
+        document.querySelectorAll('section').forEach(s => {
+            if(s.id !== 'home') {
+                s.style.opacity = '0';
+                s.style.transform = 'translateY(20px)';
+            }
+        });
+    </script>
+</body>
+</html>
